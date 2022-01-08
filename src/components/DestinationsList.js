@@ -11,18 +11,21 @@ export default function DestinationsList(props) {
     const destinations = props.destinations;
 
     useEffect(() => {
-        if (likes[0] > likes[1]) {
+        const score1 = likes[0] - dislikes[0];
+        const score2 = likes[1] - dislikes[1];
+
+        if (score1 > score2) {
             setMostPopular(destinations[0].name);
         }
 
-        if (likes[1] > likes[0]) {
+        if (score1 < score2) {
             setMostPopular(destinations[1].name);
         }
 
-        if (likes[0] === likes[1]) {
+        if (score1 === score2) {
             setMostPopular("Tied - Both are equally popular");
         }
-    }, [likes, destinations]);
+    }, [likes, dislikes, destinations]);
 
     return (
         <div className='destinations'>
